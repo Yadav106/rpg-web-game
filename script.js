@@ -17,29 +17,58 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
+const locations = [
+    {
+        name: "town square",
+        "button text": ["Go To Store", "Go To Cave", "Fight Dragon"],
+        "button functions": [goStore, goCave, fightDragon],
+        text: "You are in Town Square. You see a sign that says \"Store\""
+    },
+    {
+        name: "store",
+        "button text": ["Buy 10 health(10 gold)", "Buy Weapon(30 gold)", "Go to Town Square"],
+        "button functions": [buyHealth, buyWeapon, goTown],
+        text: "You entered the Store"
+    },
+    {
+        name: "cave",
+        "button text": ["Fight Slime", "Fight Fanged Beast", "Go to Town Square"],
+        "button functions": [fightSlime, fightFanged, goTown],
+        text: "You entered the Cave, you see two monsters!"
+    }
+]
+
 // initialise buttons
 button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+function update(location){
+    button1.innerText = location["button text"][0];
+    button2.innerText = location["button text"][1];
+    button3.innerText = location["button text"][2];
+
+    text.innerText = location.text;
+
+    button1.onclick = location["button functions"][0];
+    button2.onclick = location["button functions"][1];
+    button3.onclick = location["button functions"][2];
+}
+
+function goTown() {
+    update(locations[0]);
+}
+
 function goStore() {
-    button1.innerText = "Buy 10 health (10 gold)";
-    button2.innerText = "Buy Weapons";
-    button3.innerText = "Go to Town Square";
-
-    text.innerText = "You entered the Store!";
-
-    button1.onclick = buyHealth;
-    button2.onclick = buyWeapon;
-    button3.onclick = goTown;
+    update(locations[1]);
 }
 
 function goCave() {
-    console.log("Going to cave");
+    update(locations[2]);
 }
 
 function fightDragon() {
-    console.log("Fighting Dragon");
+    
 }
 
 function buyHealth(){
@@ -50,6 +79,10 @@ function buyWeapon(){
 
 }
 
-function goTown() {
+function fightSlime() {
+
+}
+
+function fightFanged() {
 
 }
