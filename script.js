@@ -72,6 +72,12 @@ const locations = [
         "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
         "button functions": [restart, restart, restart],
         text: "You Died 💀"
+    },
+    {
+        name: "win",
+        "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+        "button functions": [restart, restart, restart],
+        text: "You won! You saved the town from the dragon!"
     }
 ];
 
@@ -249,7 +255,7 @@ function restart() {
 }
 
 function winGame() {
-    text.innerText = "You won! You saved the town from the dragon!";
+    update(locations[6]);
 }
 
 function isMonsterHit(){
