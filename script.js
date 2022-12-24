@@ -60,6 +60,18 @@ const locations = [
         "button text": ["Attack", "Dodge", "Go to Town"],
         "button functions": [attack, dodge, goTown],
         text: "You are fighting the monster!"
+    },
+    {
+        name: "kill monster",
+        "button text": ["Go to Town", "Go to Town", "Go to Town"],
+        "button functions": [goTown, goTown, goTown],
+        text: 'The monster screams "Arg!" As you kill the monster, you gain experience and find gold!'
+    },
+    {
+        name: "lose",
+        "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+        "button functions": [restart, restart, restart],
+        text: "You Die 💀"
     }
 ];
 
@@ -87,6 +99,7 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function update(location){
+    monsterStats.style.display = "none";
     button1.innerText = location["button text"][0];
     button2.innerText = location["button text"][1];
     button3.innerText = location["button text"][2];
@@ -99,7 +112,6 @@ function update(location){
 }
 
 function goTown() {
-    monsterStats.style.display = "none";
     update(locations[0]);
 }
 
@@ -181,9 +193,39 @@ function goFight(){
 }
 
 function attack() {
-
+    text.innerText = "The " + monsters[fighting].name + " attacks.\n";
+    text.innerText += "You attack with " + weapons[currentWeapon].name + ".\n";
+    health -= monsters[fighting].level;
+    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+    healthText.innerText = health;
+    monsterHealthText.innerText = monsterHealth;
+    if(health <= 0){
+        lose();
+    }
+    else if (monsterHealth <= 0){
+        monsterHealth = 0;
+        monsterHealthText.innerText = 0;
+        defeatMonster();
+    }
 }
 
 function dodge() {
+    text.innerText = "You dodged the attack from " + monsters[fighting].name;
+}
+
+function lose(){
+    update(locations[5]);
+}
+
+function defeatMonster() {
+    gold += Math.floor(monsters[fighting].level * 6.7);
+    xp += monsters[fighting].level;
+
+    goldText.innerText = gold;
+    xpText.innerHTML = xp;
+    update(locations[4]);
+}
+
+function restart() {
 
 }
