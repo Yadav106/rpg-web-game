@@ -71,7 +71,7 @@ const locations = [
         name: "lose",
         "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
         "button functions": [restart, restart, restart],
-        text: "You Die 💀"
+        text: "You Died 💀"
     }
 ];
 
@@ -158,7 +158,7 @@ function buyWeapon(){
 }
 
 function sellWeapon(){
-    if(weapons.length > 1){
+    if(inventory.length > 1){
         gold += 15;
         goldText.innerText = gold;
         let currentWeapon = inventory.shift();
@@ -203,9 +203,15 @@ function attack() {
         lose();
     }
     else if (monsterHealth <= 0){
-        monsterHealth = 0;
-        monsterHealthText.innerText = 0;
-        defeatMonster();
+        if(fighting === 2){
+            monsterHealth = 0;
+            monsterHealthText.innerText = 0;
+            winGame();
+        } else{
+            monsterHealth = 0;
+            monsterHealthText.innerText = 0;
+            defeatMonster();
+        }
     }
 }
 
@@ -236,4 +242,8 @@ function restart() {
     healthText.innerText = health;
     xpText.innerText = xp;
     goTown();
+}
+
+function winGame() {
+    text.innerText = "You won! You saved the town from the dragon!";
 }
