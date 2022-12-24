@@ -41,43 +41,50 @@ const locations = [
         name: "town square",
         "button text": ["Go To Store", "Go To Cave", "Fight Dragon"],
         "button functions": [goStore, goCave, fightDragon],
-        text: "You are in Town Square. You see a sign that says \"Store\""
+        text: "You are in Town Square. You see a sign that says \"Store\"",
+        visibile: "initial"
     },
     {
         name: "store",
         "button text": ["Buy 10 health(10 gold)", "Buy Weapon(30 gold)", "Go to Town Square"],
         "button functions": [buyHealth, buyWeapon, goTown],
-        text: "You entered the Store"
+        text: "You entered the Store",
+        visibile: "initial"
     },
     {
         name: "cave",
         "button text": ["Fight Slime", "Fight Fanged Beast", "Go to Town Square"],
         "button functions": [fightSlime, fightFanged, goTown],
-        text: "You entered the Cave, you see two monsters!"
+        text: "You entered the Cave, you see two monsters!",
+        visibile: "initial"
     },
     {
         name: "fight",
         "button text": ["Attack", "Dodge", "Go to Town"],
         "button functions": [attack, dodge, goTown],
-        text: "You are fighting the monster!"
+        text: "You are fighting the monster!",
+        visibile: "initial"
     },
     {
         name: "kill monster",
         "button text": ["Go to Town", "Go to Town", "Go to Town"],
         "button functions": [goTown, goTown, goTown],
-        text: 'The monster screams "Arg!" As you kill the monster, you gain experience and find gold!'
+        text: 'The monster screams "Arg!" As you kill the monster, you gain experience and find gold!',
+        visibile: "none"
     },
     {
         name: "lose",
         "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
         "button functions": [restart, restart, restart],
-        text: "You Died 💀"
+        text: "You Died 💀",
+        visibile: "none"
     },
     {
         name: "win",
         "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
         "button functions": [restart, restart, restart],
-        text: "You won! You saved the town from the dragon!"
+        text: "You won! You saved the town from the dragon!",
+        visibile: "none"
     }
 ];
 
@@ -106,6 +113,8 @@ button3.onclick = fightDragon;
 
 function update(location){
     monsterStats.style.display = "none";
+    button1.style.display = location.visibile;
+    button3.style.display = location.visibile;
     button1.innerText = location["button text"][0];
     button2.innerText = location["button text"][1];
     button3.innerText = location["button text"][2];
