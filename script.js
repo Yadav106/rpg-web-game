@@ -86,10 +86,6 @@ function goCave() {
     update(locations[2]);
 }
 
-function fightDragon() {
-    
-}
-
 function buyHealth(){
     if (gold>=10){
         gold -= 10;
@@ -142,4 +138,8 @@ function fightSlime() {
 
 function fightFanged() {
 
+}
+
+function fightDragon(){
+    
 }
