@@ -196,9 +196,13 @@ function attack() {
     text.innerText = "The " + monsters[fighting].name + " attacks.\n";
     text.innerText += "You attack with " + weapons[currentWeapon].name + ".\n";
     health -= monsters[fighting].level;
-    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+    if(isMonsterHit()){
+        monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+        monsterHealthText.innerText = monsterHealth;
+    }else{
+        text.innerText = "You miss!";
+    }
     healthText.innerText = health;
-    monsterHealthText.innerText = monsterHealth;
     if(health <= 0){
         lose();
     }
@@ -246,4 +250,8 @@ function restart() {
 
 function winGame() {
     text.innerText = "You won! You saved the town from the dragon!";
+}
+
+function isMonsterHit(){
+    return Math.random()>0.2 || health <=20;
 }
